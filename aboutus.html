@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>We Create Belonging</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@1,400&display=block" rel="stylesheet">
+
+    <style>
+        /* RESET & BASE STYLES */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* --- START OF CHANGED SECTION --- */
+        html {
+            /* Replaced solid color with background image and dark overlay */
+            background-image: linear-gradient(rgba(17, 17, 17, 0.8), rgba(17, 17, 17, 0.8)), url('manifesto-bg.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        body {
+            background-color: transparent; /* Changed from #111111 to transparent */
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        /* --- END OF CHANGED SECTION --- */
+
+        /* NAVIGATION BAR */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 48px;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 10;
+            
+            /* ANIMATION STATE: Starts invisible */
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: opacity 1.2s ease, transform 1.2s ease;
+        }
+
+     .brand-image {
+    height: 60px;
+    width: auto;
+    transform: translateY(12px) translateX(-8px);
+}
+
+
+        .swoosh {
+            width: 30px;
+            height: 12px;
+            background-color: white;
+            clip-path: polygon(0% 100%, 100% 0%, 100% 25%, 15% 100%);
+            border-radius: 0 0 40% 40%;
+            transform: rotate(-10deg);
+        }
+
+        /* HOME BUTTON STYLES */
+        .home-btn {
+            text-decoration: none;
+            background-color: #ffffff; 
+            color: #111111; 
+            font-weight: 600;
+            font-size: 0.9rem;
+            padding: 12px 32px; 
+            border-radius: 50px; 
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .home-btn:hover {
+            background-color: #e6e6e6; 
+            transform: translateY(-2px); 
+        }
+
+        /* MAIN HERO SECTION */
+        main {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding-left: 4vw;
+            height: 100%;
+            position: relative;
+        }
+
+        .headline-container {
+            font-family: 'Anton', sans-serif;
+            text-transform: uppercase;
+            font-size: clamp(2.5rem, 9.5vw, 8.5rem); 
+            line-height: 1.1; 
+            letter-spacing: -0.02em;
+            display: flex;
+            flex-direction: column;
+            cursor: default;
+            position: relative;
+            z-index: 2; 
+        }
+
+        /* ANIMATION STATES FOR HEADLINE ROWS */
+        .word-row {
+            display: block;
+            opacity: 0;
+            transform: translateY(15px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        /* Helper class to trigger visibility */
+        .is-visible {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
+
+        .dynamic-wrapper {
+            display: inline-block;
+            min-height: 1em;
+            color: #ffffff;
+            opacity: 0; 
+            transform: translateY(15px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        /* SUBTITLE */
+        .subtitle {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: clamp(0.9rem, 1.5vw, 1.25rem);
+            margin-top: 24px;
+            font-weight: 400;
+            letter-spacing: 0.02em;
+            position: relative;
+            z-index: 2;
+            
+            /* ANIMATION STATE */
+            opacity: 0;
+            transition: opacity 1.5s ease;
+        }
+
+        /* INLINE LOGO "O" STYLE */
+        .logo-o {
+            display: inline-block;
+            width: 1.0em;        /* Increased size */
+            height: 0.95em;       /* Increased size */
+            margin: 0 0.04em;
+            vertical-align: middle;
+            border-radius: 50%;
+            object-fit: contain;
+            transform: translateY(-0.1em); /* Adjusted alignment for larger size */
+        }
+
+        /* MEDIA QUERY FOR MOBILE */
+        @media (max-width: 768px) {
+            header {
+                padding: 20px;
+            }
+            .headline-container {
+                font-size: 13vw; 
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header id="main-header">
+          <div class="container header-inner">
+            <a href="#" class="brand-logo">
+                <img src="ouiranna.logo.png" alt="Ouiranna Logo" class="brand-image">
+            </a>
+        </div>
+
+        
+      <a href="index.html#what-opens-our-hearts" class="home-btn">Home</a>
+    </header>
+
+    <main>
+        <div class="headline-container">
+            <span class="word-row" id="row-we">WE</span>
+            <span class="word-row" id="row-create">CREATE</span>
+            <span class="word-row dynamic-wrapper" id="row-dynamic">
+                <span id="changing-text">CONNECTION</span>
+            </span>
+        </div>
+
+        <p class="subtitle" id="subtitle-text">
+            If you have a heart, there is a place for you.
+        </p>
+    </main>
+
+    <script>
+        const words = [
+            "CONNECTION",
+            "WARMTH",
+            "TRUST",
+            "COURAGE",
+            "EMPATHY",
+            "PRESENCE",
+            "UNDERSTANDING"
+        ];
+        
+        const finalContent = 'BEL<img src="ouirannaworld.png" class="logo-o" alt="Ouiranna Logo">NGING*';
+
+        const textElement = document.getElementById('changing-text');
+        
+        // Elements to animate
+        const header = document.getElementById('main-header');
+        const rowWe = document.getElementById('row-we');
+        const rowCreate = document.getElementById('row-create');
+        const rowDynamic = document.getElementById('row-dynamic');
+        const subtitle = document.getElementById('subtitle-text');
+
+        let currentIndex = 0;
+        let speed = 200; 
+
+        // Function to handle the word cycling
+        function rotateWords() {
+            if (currentIndex < words.length) {
+                textElement.innerHTML = words[currentIndex];
+                currentIndex++;
+                setTimeout(rotateWords, speed);
+            } else {
+                textElement.innerHTML = finalContent;
+                // Fade in subtitle after the final word locks
+                setTimeout(() => {
+                    subtitle.classList.add('is-visible');
+                }, 400);
+            }
+        }
+
+        // ENTRY SEQUENCE CONTROLLER
+        document.fonts.ready.then(function () {
+            
+            // Step 1: Animate Header (Logo)
+            setTimeout(() => {
+                header.classList.add('is-visible'); 
+            }, 100);
+
+            // Step 2: Animate "WE"
+            setTimeout(() => {
+                rowWe.classList.add('is-visible');
+            }, 800);
+
+            // Step 3: Animate "CREATE" 
+            setTimeout(() => {
+                rowCreate.classList.add('is-visible');
+            }, 1400);
+
+            // Step 4: Animate Rotating Words Section
+            setTimeout(() => {
+                rowDynamic.classList.add('is-visible');
+                setTimeout(rotateWords, 300);
+            }, 2000);
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visit Essaouira | The Windy City</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* =========================================
+           RESET & VARIABLES
+           ========================================= */
+        :root {
+            --primary-text: #ffffff;
+            --accent-color: #e0b354; /* Warm Gold */
+            --bg-dark: #121212;
+            --btn-bg: rgba(255, 255, 255, 0.15);
+            --btn-hover: #e0b354;
+            --overlay-color: rgba(0, 0, 0, 0.45);
+            --font-title: 'Oswald', sans-serif; /* Condensed, powerful */
+            --font-body: 'Montserrat', sans-serif;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-dark);
+            color: var(--primary-text);
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: white; }
+        button { border: none; outline: none; cursor: pointer; }
+
+        /* =========================================
+           NAVIGATION
+           ========================================= */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            z-index: 100;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
+        }
+
+        /* Left: Home Button */
+        .nav-left .home-btn {
+            background: var(--btn-bg);
+            backdrop-filter: blur(5px);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-family: var(--font-body);
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: white;
+            transition: var(--transition);
+            border: 1px solid rgba(255,255,255,0.1);
+            display: inline-block;
+        }
+
+        .nav-left .home-btn:hover {
+            background: var(--btn-hover);
+            color: black;
+            border-color: var(--btn-hover);
+        }
+
+        /* Right: Essaouira + Map Button */
+        .nav-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        .brand-name {
+            font-family: var(--font-title);
+            font-size: 2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            line-height: 1;
+            margin-bottom: 8px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .map-btn {
+            background: var(--btn-bg);
+            backdrop-filter: blur(5px);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-family: var(--font-body);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: white;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: var(--transition);
+        }
+
+        .map-btn:hover {
+            background: var(--btn-hover);
+            color: black;
+        }
+
+        /* =========================================
+           HERO SECTION
+           ========================================= */
+        .hero {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            /* Placeholder URL used. Change url() to 'hero-bg.jpg' locally */
+            background-image: url('hero-bg.jpg'); 
+            background-size: cover;
+            background-position: center;
+            /* Fallback if image missing */
+            background-color: #333;
+        }
+
+        /* Note for user: If image is missing, this gradient overlay ensures text is readable */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--overlay-color);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+        }
+
+        .hero-pre {
+            font-family: var(--font-body);
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            margin-bottom: 0.5rem;
+            opacity: 0.9;
+        }
+
+        .hero-title {
+            font-family: var(--font-title);
+            font-size: clamp(4rem, 12vw, 9rem); /* Responsive Huge Text */
+            font-weight: 700;
+            text-transform: uppercase;
+            line-height: 0.9;
+            margin-bottom: 2.5rem;
+            text-shadow: 0 5px 20px rgba(0,0,0,0.6);
+        }
+
+        .hero-cta {
+            display: inline-block;
+            background: var(--accent-color);
+            color: black;
+            padding: 14px 35px;
+            border-radius: 50px;
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(224, 179, 84, 0.4);
+        }
+
+        .hero-cta:hover {
+            transform: translateY(-3px);
+            background: white;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        /* =========================================
+           INFO BAR (Stacked on Mobile, Row on Desktop)
+           ========================================= */
+        .info-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(10px);
+            z-index: 2;
+            padding: 2rem 5%;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .info-item {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .info-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent-color);
+            border-radius: 50%;
+        }
+
+        .info-title {
+            font-family: var(--font-title);
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .info-desc {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            line-height: 1.5;
+        }
+
+        /* =========================================
+           GALLERY SECTION
+           ========================================= */
+        #gallery {
+            position: relative;
+            padding: 8rem 5%;
+            background-color: #0a0a0a;
+            overflow: hidden;
+            min-height: 100vh;
+        }
+
+        /* Decorative Background Images Framing the Gallery */
+        .gallery-bg-frame {
+            position: absolute;
+            z-index: 0;
+            opacity: 0.4;
+            pointer-events: none;
+            object-fit: cover;
+        }
+
+        /* Top Left Frame */
+        .bg-1 {
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 60%;
+            mask-image: linear-gradient(to bottom right, black, transparent);
+            -webkit-mask-image: linear-gradient(to bottom right, black, transparent);
+        }
+
+        /* Bottom Right Frame */
+        .bg-2 {
+            bottom: 0;
+            right: 0;
+            width: 50%;
+            height: 60%;
+            mask-image: linear-gradient(to top left, black, transparent);
+            -webkit-mask-image: linear-gradient(to top left, black, transparent);
+        }
+
+        .gallery-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-title {
+            font-family: var(--font-title);
+            font-size: 4rem;
+            text-transform: uppercase;
+            text-align: center;
+            margin-bottom: 4rem;
+            letter-spacing: 2px;
+            color: white;
+        }
+
+        .section-title span {
+            color: var(--accent-color);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .gallery-item {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            opacity: 0;
+            transition: 0.3s;
+            display: flex;
+            align-items: flex-end;
+            padding: 20px;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .overlay-text {
+            color: var(--accent-color);
+            font-family: var(--font-title);
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* =========================================
+           MODAL (MAP)
+           ========================================= */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 2000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+            padding: 20px;
+        }
+
+        .modal.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .modal-container {
+            width: 100%;
+            max-width: 800px;
+            background: #1a1a1a;
+            border-radius: 10px;
+            padding: 10px;
+            position: relative;
+            transform: translateY(20px);
+            transition: transform 0.4s ease;
+            text-align: center;
+        }
+
+        .modal.active .modal-container {
+            transform: translateY(0);
+        }
+
+        .modal iframe {
+            width: 100%;
+            height: 450px;
+            border-radius: 6px;
+            border: none;
+        }
+
+        .close-modal-btn {
+            margin-top: 15px;
+            padding: 10px 30px;
+            background: #333;
+            color: white;
+            border-radius: 30px;
+            font-family: var(--font-body);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .close-modal-btn:hover {
+            background: var(--accent-color);
+            color: black;
+        }
+
+        /* =========================================
+           RESPONSIVE
+           ========================================= */
+        @media (max-width: 900px) {
+            .info-bar {
+                position: relative;
+                grid-template-columns: 1fr;
+                padding: 3rem 5%;
+                background: #1a1a1a;
+            }
+            
+            .hero {
+                height: auto;
+                min-height: 100vh;
+                padding-bottom: 2rem;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .bg-1, .bg-2 {
+                display: none; /* Hide background frames on mobile for cleanliness */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-left">
+            <a href="index.html" class="home-btn">Home</a>
+        </div>
+        <div class="nav-right">
+            <span class="brand-name">ESSAOUIRA</span>
+            <button class="map-btn" id="openMapBtn">Explore the Map</button>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <p class="hero-pre">This is</p>
+            <h1 class="hero-title">Essaouira.</h1>
+            <button class="hero-cta" onclick="document.getElementById('gallery').scrollIntoView()">
+                Explore the Heart of Essaouira
+            </button>
+        </div>
+
+        <div class="info-bar">
+            <div class="info-item">
+                <div class="info-header">
+                    <div class="info-dot"></div>
+                    <h3 class="info-title">Most Beautiful Places</h3>
+                </div>
+                <p class="info-desc">Wander the UNESCO Medina ramparts and watch the blue boats bobbing in the ancient harbor.</p>
+            </div>
+            <div class="info-item">
+                <div class="info-header">
+                    <div class="info-dot"></div>
+                    <h3 class="info-title">Local Culture</h3>
+                </div>
+                <p class="info-desc">Experience the rhythm of Gnaoua music and the craftsmanship of thuya wood artisans.</p>
+            </div>
+            <div class="info-item">
+                <div class="info-header">
+                    <div class="info-dot"></div>
+                    <h3 class="info-title">Guided Experiences</h3>
+                </div>
+                <p class="info-desc">From kitesurfing in the "Windy City" to sunset camel rides on the endless dunes.</p>
+            </div>
+        </div>
+    </header>
+
+    <section id="gallery">
+        <img src="gallery-bg-1.jpg" alt="" class="gallery-bg-frame bg-1">
+        <img src="gallery-bg-2.jpg" alt="" class="gallery-bg-frame bg-2">
+
+        <div class="gallery-content">
+            <h2 class="section-title">WHAT OPENS <span>OUR HEARTS</span></h2>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="gallery-10.jpg" alt="Essaouira 1" onerror="this.src='https://images.unsplash.com/photo-1577147443647-81856d5151af?w=800&q=80'">
+                    <div class="gallery-overlay"><span class="overlay-text">The Port</span></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="gallery-20.jpg" alt="Essaouira 2" onerror="this.src='https://images.unsplash.com/photo-1539020140153-e479b8c22e70?w=800&q=80'">
+                    <div class="gallery-overlay"><span class="overlay-text">The Ramparts</span></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="gallery-30.jpg" alt="Essaouira 3" onerror="this.src='https://images.unsplash.com/photo-1590418606746-018840f9cd0f?w=800&q=80'">
+                    <div class="gallery-overlay"><span class="overlay-text">The Souks</span></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="gallery-40.jpg" alt="Essaouira 4" onerror="this.src='https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=800&q=80'">
+                    <div class="gallery-overlay"><span class="overlay-text">The Ocean</span></div>
+               </div>
+                 <div class="gallery-item">
+                    <img src="gallery-50.jpg" alt="Essaouira 5" onerror="this.src='https://images.unsplash.com/photo-1577147443647-81856d5151af?w=800&q=80'">
+                    <div class="gallery-overlay"><span class="overlay-text">Activities</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="modal" id="mapModal">
+        <div class="modal-container">
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d54274.63942080775!2d-9.814674751412034!3d31.49989632837269!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xdad9a4e9f588ccf%3A0x574f1d258d63635e!2sEssaouira%2C%20Morocco!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus" 
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+            <button class="close-modal-btn" id="closeMapBtn">Close Map</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Modal Logic
+            const modal = document.getElementById('mapModal');
+            const openBtn = document.getElementById('openMapBtn');
+            const closeBtn = document.getElementById('closeMapBtn');
+
+            function toggleModal(show) {
+                if (show) {
+                    modal.classList.add('active');
+                } else {
+                    modal.classList.remove('active');
+                }
+            }
+
+            openBtn.addEventListener('click', () => toggleModal(true));
+            closeBtn.addEventListener('click', () => toggleModal(false));
+            
+            // Close on outside click
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) toggleModal(false);
+            });
+
+            // Fallback for Hero Background (JS Check)
+            // This ensures if user hasn't added hero-bg.jpg yet, it doesn't look broken
+            const hero = document.querySelector('.hero');
+            const bgImg = new Image();
+            bgImg.src = 'hero-bg.jpg';
+            bgImg.onerror = function(){
+                // If local file not found, use a Unsplash fallback for visual verification
+                hero.style.backgroundImage = "url('https://images.unsplash.com/photo-1556950961-8c0929245691?q=80&w=2070&auto=format&fit=crop')";
+            };
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Book Your Experience</title>
+    <style>
+        /* --- 1. GLOBAL & BACKGROUND --- */
+        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+        
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background: url('manifesto-bg.jpg') no-repeat center center fixed; 
+            background-size: cover;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.6); 
+            z-index: -1;
+        }
+
+        /* --- 2. MAIN CARD LAYOUT --- */
+        .booking-card {
+            background: #fff;
+            width: 95%;
+            max-width: 1200px;
+            height: 85vh;
+            max-height: 900px;
+            min-height: 600px;
+            display: flex;
+            flex-direction: row;
+            border-radius: 20px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+            overflow: hidden; 
+            position: relative;
+        }
+
+        /* --- 3. COLUMNS --- */
+        .program-col, .form-col {
+            flex: 1;
+            padding: 60px;
+            overflow-y: auto; 
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .program-col {
+            border-right: 1px solid #f0f0f0;
+            background-color: #fff;
+        }
+
+        .form-col {
+            background-color: #fff;
+            position: relative;
+        }
+
+        .program-col::-webkit-scrollbar, .form-col::-webkit-scrollbar { width: 6px; }
+        .program-col::-webkit-scrollbar-track, .form-col::-webkit-scrollbar-track { background: transparent; }
+        .program-col::-webkit-scrollbar-thumb, .form-col::-webkit-scrollbar-thumb { background: #eee; border-radius: 3px; }
+
+        /* --- 4. TYPOGRAPHY --- */
+        .section-headline {
+            font-family: 'Arial Black', 'Helvetica Neue', Arial, sans-serif;
+            font-size: 36px;
+            font-weight: 900;
+            color: #000;
+            text-transform: uppercase;
+            letter-spacing: -1.5px;
+            line-height: 1;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .section-headline::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: #000;
+            margin-top: 20px;
+        }
+
+        .section-desc {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 40px;
+            max-width: 90%;
+            line-height: 1.5;
+        }
+
+        /* --- 5. TIMELINE STYLES --- */
+        .timeline-wrapper {
+            position: relative;
+            padding-left: 15px;
+        }
+
+        .timeline-wrapper::before {
+            content: '';
+            position: absolute;
+            left: 40px; 
+            top: 25px;
+            bottom: 40px;
+            width: 2px;
+            background: #f0f0f0;
+            z-index: 0;
+        }
+
+        .timeline-step {
+            display: flex;
+            position: relative;
+            z-index: 1;
+            margin-bottom: 45px;
+        }
+
+        .step-icon-box {
+            flex-shrink: 0;
+            width: 50px;
+            height: 50px;
+            background: #f8f8f8; 
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 30px;
+            border: 4px solid #fff; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08); 
+            overflow: hidden; 
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .step-icon-box:hover { transform: scale(1.05); }
+
+        .step-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .step-content { padding-top: 4px; }
+
+        .step-title {
+            font-size: 15px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #222;
+            margin-bottom: 6px;
+        }
+
+        .step-desc {
+            font-size: 14px;
+            color: #777;
+            line-height: 1.5;
+            max-width: 350px;
+        }
+
+        /* --- 6. FORM STYLES --- */
+        .close-link {
+            position: absolute;
+            top: 25px;
+            right: 30px;
+            font-size: 32px;
+            color: #ddd;
+            text-decoration: none;
+            line-height: 1;
+            z-index: 10;
+        }
+        
+        .form-group { margin-bottom: 28px; }
+
+        .label {
+            display: block;
+            font-size: 11px;
+            text-transform: uppercase;
+            font-weight: 800;
+            letter-spacing: 1px;
+            color: #999;
+            margin-bottom: 10px;
+        }
+
+        .input-std {
+            width: 100%;
+            padding: 16px;
+            border: 1px solid #e5e5e5;
+            border-radius: 8px;
+            font-size: 16px;
+            color: #333;
+            outline: none;
+            background: #fafafa;
+            font-family: inherit;
+        }
+        .input-std:focus { border-color: #27ae60; background: #fff; }
+
+        .pill-container { display: flex; gap: 10px; flex-wrap: wrap; }
+        .pill {
+            flex: 1;
+            min-width: 90px;
+            padding: 14px;
+            text-align: center;
+            border: 1px solid #e5e5e5;
+            border-radius: 8px;
+            font-size: 13px;
+            cursor: pointer;
+            color: #555;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        .pill.active { background: #edf7f1; border-color: #27ae60; color: #27ae60; font-weight: 700; }
+
+        .counter-ui {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #fff;
+            padding: 5px 0;
+        }
+        .c-controls {
+            display: flex; 
+            align-items: center; 
+            gap: 15px; 
+            background: #fafafa; 
+            padding: 8px 15px;
+            border-radius: 30px; 
+            border: 1px solid #eee;
+        }
+        .c-btn {
+            width: 30px; height: 30px;
+            border-radius: 50%;
+            border: none;
+            background: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            font-weight: bold;
+            cursor: pointer;
+            color: #333;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .gift-grid { display: flex; gap: 10px; }
+        .gift-card {
+            flex: 1;
+            border: 1px solid #e5e5e5;
+            border-radius: 8px;
+            padding: 18px 10px;
+            text-align: center;
+            cursor: pointer;
+            background: #fff;
+        }
+        .gift-card.selected { background: #edf7f1; border-color: #27ae60; box-shadow: 0 4px 10px rgba(39, 174, 96, 0.15); }
+        .g-icon { display: block; font-size: 24px; margin-bottom: 8px; }
+        .g-name { font-size: 11px; font-weight: 800; color: #555; text-transform: uppercase; letter-spacing: 0.5px; }
+
+        .btn-book {
+            display: block;
+            width: 100%;
+            padding: 22px;
+            background-color: #27ae60;
+            color: white;
+            font-weight: 800;
+            font-size: 16px;
+            letter-spacing: 1px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(39, 174, 96, 0.25);
+            text-transform: uppercase;
+            margin-top: 40px;
+        }
+
+        /* --- 7. LIGHTBOX --- */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0; top: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.95);
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .lightbox.active { display: flex; }
+        .lightbox-img-container { max-width: 95%; max-height: 80vh; display: flex; justify-content: center; }
+        .lightbox-img { max-width: 100%; max-height: 80vh; border-radius: 8px; object-fit: contain; }
+        .lb-close { position: absolute; top: 20px; right: 20px; color: #fff; font-size: 35px; cursor: pointer; padding: 10px; line-height: 1; }
+        .lb-prev, .lb-next {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            width: 50px; height: 50px;
+            background: rgba(255,255,255,0.1); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: #fff; font-size: 24px; cursor: pointer;
+        }
+        .lb-prev { left: 10px; }
+        .lb-next { right: 10px; }
+
+        /* --- 8. MOBILE OPTIMIZATION --- */
+        @media (max-width: 900px) {
+            body { display: block; padding: 15px 10px; height: auto; min-height: 100vh; }
+            .booking-card {
+                flex-direction: column; width: 100%; height: auto !important;
+                max-height: none !important; min-height: 0; border-radius: 16px;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            }
+            .program-col { order: 1; border-right: none; border-bottom: 1px solid #eee; }
+            .form-col { order: 2; }
+            .program-col, .form-col { padding: 40px 25px; overflow: visible; width: 100%; }
+            .section-headline { font-size: 26px; margin-bottom: 15px; letter-spacing: -1px; }
+            .section-headline::after { margin-top: 15px; }
+            .section-desc { margin-bottom: 30px; font-size: 13px; }
+            .timeline-step { margin-bottom: 35px; }
+            .step-icon-box { width: 45px; height: 45px; margin-right: 20px; }
+            .timeline-wrapper::before { left: 37px; top: 20px; bottom: 20px; }
+            .close-link { top: 20px; right: 20px; font-size: 28px; }
+            .lb-prev, .lb-next { width: 40px; height: 40px; font-size: 18px; }
+        }
+    </style>
+</head>
+<body>
+
+<div id="gallery-lightbox" class="lightbox">
+    <span class="lb-close" onclick="closeLightbox()">&times;</span>
+    <a class="lb-prev" onclick="changeSlide(-1)">&#10094;</a>
+    <a class="lb-next" onclick="changeSlide(1)">&#10095;</a>
+    <div class="lightbox-img-container">
+        <img id="lightbox-img" class="lightbox-img" src="" alt="Full view">
+    </div>
+</div>
+
+<div class="booking-card">
+    
+    <div class="program-col">
+        <h2 class="section-headline">Au programme</h2>
+        <p class="section-desc" id="exp-desc-display">Loading description...</p>
+        
+        <div class="timeline-wrapper" id="timeline-container">
+            </div>
+        
+        <p style="margin-top: 40px; font-size: 11px; color: #aaa; text-transform: uppercase; letter-spacing: 1px; font-weight: 600;">
+            * Available in English, French & Arabic
+        </p>
+    </div>
+
+    <div class="form-col">
+        <a href="index.html" class="close-link">&times;</a>
+
+        <h3 id="exp-title-display" class="section-headline">Loading...</h3>
+
+        <div class="form-group">
+            <label class="label">Select Date</label>
+            <input type="date" class="input-std" id="date-input">
+        </div>
+
+        <div class="form-group">
+            <label class="label">Select Time</label>
+            <div class="pill-container">
+                <div class="pill" onclick="selectTime(this)">10h - 12h</div>
+                <div class="pill" onclick="selectTime(this)">14h - 16h</div>
+                <div class="pill" onclick="selectTime(this)">16h - 18h</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="label">Number of Guests</label>
+            <div class="counter-ui">
+                <span style="font-size: 14px; font-weight: 600; color: #333;">Total People</span>
+                <div class="c-controls">
+                    <button class="c-btn" onclick="updateGuest(-1)">-</button>
+                    <span class="c-val" id="guest-count">2</span>
+                    <button class="c-btn" onclick="updateGuest(1)">+</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="label">Choose Your Gift</label>
+            <div class="gift-grid">
+                <div class="gift-card" onclick="selectGift(this)">
+                    <span class="g-icon">🎁</span>
+                    <span class="g-name">Gift 1</span>
+                </div>
+                <div class="gift-card" onclick="selectGift(this)">
+                    <span class="g-icon">🎁</span>
+                    <span class="g-name">Gift 2</span>
+                </div>
+                <div class="gift-card" onclick="selectGift(this)">
+                    <span class="g-icon">🎁</span>
+                    <span class="g-name">Gift 3</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="label">International Phone Number</label>
+            <input type="tel" class="input-std" id="phone-input" placeholder="+33 6 12 34 56 78">
+        </div>
+
+        <div class="form-group">
+            <label class="label">Email Address</label>
+            <input type="email" class="input-std" id="email-input" placeholder="your@email.com">
+        </div>
+
+        <button id="book-btn" class="btn-book" onclick="submitBooking()">
+            BOOK NOW
+        </button>
+    </div>
+</div>
+
+<script>
+    // --- 1. CONFIGURATION & DATA ---
+    const experiencesData = {
+        'family-dining': {
+            title: "Family Dining Experience",
+            description: "Immerse yourself in authentic Moroccan hospitality. Join Wissal and her mother for an unforgettable culinary journey inside their home.",
+            defaultGuests: 2,
+            programme: [
+                { title: "Bienvenue chez nous", desc: "Rencontrez Wissal et sa mère dans leur magnifique salon marocain." },
+                { title: "Temps de cuisson", desc: "Rendez-vous dans la cuisine pour préparer des plats traditionnels." },
+                { title: "Pause thé à la menthe", desc: "Détendez-vous avec un thé à la menthe et des biscuits faits maison." },
+                { title: "Tenue traditionnelle", desc: "Essayez de belles tenues traditionnelles marocaines pour des photos." },
+                { title: "Bon appétit", desc: "Rassemblez-vous autour de la table et savourez le festin créé." }
+            ]
+        },
+        'darija-intro': {
+            title: "Darija Language Workshop",
+            description: "Unlock the secrets of the Moroccan dialect. A fun, interactive session designed to help you navigate the souks like a local.",
+            defaultGuests: 1,
+            programme: [
+                { title: "Introduction", desc: "Learn the basics of Moroccan greetings and culture." },
+                { title: "Pronunciation", desc: "Master the difficult sounds of Darija with a native speaker." },
+                { title: "Script Writing", desc: "Learn to write your name in Arabic calligraphy." },
+                { title: "Coffee Practice", desc: "Practice your new skills over coffee in a local cafe." },
+                { title: "Market Challenge", desc: "Use your skills to buy a small item in the souk." }
+            ]
+        },
+        'medina-walk': {
+            title: "Hidden Medina Walk",
+            description: "Step off the beaten path. Discover secret gardens, ancient artisans, and rooftop views that most tourists never see.",
+            defaultGuests: 4,
+            programme: [
+                { title: "Meeting Point", desc: "We meet at the ancient gates of the Medina." },
+                { title: "Architecture", desc: "Discover hidden mosques and secret gardens." },
+                { title: "Artisans", desc: "Visit local craftsmen working with leather and wood." },
+                { title: "Tasting", desc: "Stop for a quick taste of local street food." },
+                { title: "Sunset View", desc: "End the tour on a rooftop with a panoramic view." }
+            ]
+        }
+    };
+
+    // --- 2. STATE ---
+    let state = {
+        expId: 'family-dining', // default fallback
+        guests: 2,
+        time: '',
+        date: '',
+        gift: '',
+        phone: '',
+        email: ''
+    };
+    let currentImgIndex = 0;
+    let currentImages = [];
+
+    // --- 3. INITIALIZATION LOGIC ---
+    function init() {
+        // 1. Get ID from URL
+        const params = new URLSearchParams(window.location.search);
+        const urlId = params.get('experience');
+
+        // 2. Validate ID or Fallback
+        if (urlId && experiencesData[urlId]) {
+            state.expId = urlId;
+        }
+
+        // 3. Load Data
+        const data = experiencesData[state.expId];
+        state.guests = data.defaultGuests;
+
+        // 4. Update DOM Elements
+        document.getElementById('exp-title-display').textContent = data.title;
+        document.getElementById('exp-desc-display').textContent = data.description;
+        document.getElementById('guest-count').textContent = state.guests;
+
+        // 5. Build Timeline & Images
+        const timelineContainer = document.getElementById('timeline-container');
+        let html = '';
+        currentImages = []; // Reset lightbox images
+
+        data.programme.forEach((step, index) => {
+            // Construct filename: experience-id-step-X.jpg
+            const imgPath = `${state.expId}-step-${index + 1}.jpg`;
+            currentImages.push(imgPath);
+
+            html += `
+            <div class="timeline-step">
+                <div class="step-icon-box" onclick="openLightbox(${index})">
+                    <img src="${imgPath}" alt="${step.title}" class="step-img" onerror="this.src='placeholder.jpg'">
+                </div>
+                <div class="step-content">
+                    <div class="step-title">${step.title}</div>
+                    <div class="step-desc">${step.desc}</div>
+                </div>
+            </div>`;
+        });
+
+        timelineContainer.innerHTML = html;
+    }
+
+    // --- 4. FORM ACTIONS ---
+    window.updateGuest = function(change) {
+        const newCount = state.guests + change;
+        if(newCount >= 1) {
+            state.guests = newCount;
+            document.getElementById('guest-count').textContent = state.guests;
+        }
+    };
+
+    window.selectTime = function(el) {
+        document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+        el.classList.add('active');
+        state.time = el.innerText;
+    };
+
+    window.selectGift = function(el) {
+        document.querySelectorAll('.gift-card').forEach(c => c.classList.remove('selected'));
+        el.classList.add('selected');
+        state.gift = el.querySelector('.g-name').innerText;
+    };
+
+    window.submitBooking = function() {
+        state.date = document.getElementById('date-input').value;
+        state.phone = document.getElementById('phone-input').value;
+        state.email = document.getElementById('email-input').value;
+
+        if(!state.date || !state.time || !state.phone || !state.email) {
+            alert("Please fill in all fields (Date, Time, Phone, Email)");
+            return;
+        }
+        
+        // Demo Submission
+        const expTitle = experiencesData[state.expId].title;
+        alert(`BOOKING REQUEST\n\nExperience: ${expTitle}\nGuests: ${state.guests}\nDate: ${state.date}\nTime: ${state.time}\nPhone: ${state.phone}\nEmail: ${state.email}`);
+    };
+
+    // --- 5. LIGHTBOX ACTIONS ---
+    window.openLightbox = function(index) {
+        currentImgIndex = index;
+        const lightbox = document.getElementById('gallery-lightbox');
+        document.getElementById('lightbox-img').src = currentImages[currentImgIndex];
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden'; 
+    };
+
+    window.closeLightbox = function() {
+        document.getElementById('gallery-lightbox').classList.remove('active');
+        document.body.style.overflow = '';
+    };
+
+    window.changeSlide = function(n) {
+        currentImgIndex += n;
+        if (currentImgIndex >= currentImages.length) currentImgIndex = 0;
+        if (currentImgIndex < 0) currentImgIndex = currentImages.length - 1;
+        document.getElementById('lightbox-img').src = currentImages[currentImgIndex];
+    };
+
+    document.getElementById('gallery-lightbox').addEventListener('click', function(e) {
+        if(e.target === this) closeLightbox();
+    });
+
+    // Run Initialization
+    init();
+
+</script>
+</body>
+</html>

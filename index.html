@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="OUIRANNA - Award winning luxury travel experts in Essaouira, Morocco. Crafting bespoke journeys and authentic immersions.">
+    <title>OUIRANNA | Authentic Essaouira Immersion</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #C15F33; 
+            --accent: #E91E63; 
+            --bg-linen: #F9F7F2; 
+            --dark: #1A1A1A; 
+            --white: #FFFFFF;
+            --step-sage: #4A5D4E;
+            --gold: #C5A059;
+            --soft-gray: #F4F4F4;
+            --overlay-dark: rgba(0, 0, 0, 0.4);
+            --transition-smooth: all 0.4s ease;
+        }
+
+        /* Base Styles & Reset */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            color: var(--dark); 
+            background: var(--white); 
+            line-height: 1.6; 
+            overflow-x: hidden; 
+            -webkit-font-smoothing: antialiased; 
+        }
+        
+        h1, h2, h3, h4 { font-family: 'Playfair Display', serif; font-weight: 700; }
+        a { text-decoration: none; transition: 0.3s; color: inherit; }
+        button { font-family: inherit; border: none; outline: none; cursor: pointer; }
+        img { display: block; max-width: 100%; }
+
+         /* Navigation */
+        header {
+            position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 20px 6%; background: transparent; 
+            transition: background 0.4s ease, padding 0.4s ease;
+        }
+        header.scrolled { background: rgba(0,0,0,0.95); padding: 12px 6%; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+        
+        .brand-image {
+            height: 50px;       
+            width: auto;        
+            transition: height 0.4s ease; 
+        }
+        
+        header.scrolled .brand-image {
+            height: 40px; 
+        }
+
+        .nav-left .logo { font-size: 18px; font-weight: 700; letter-spacing: 2px; color: var(--white); text-transform: uppercase; line-height: 1.2; cursor: pointer; }
+        .nav-center { display: flex; gap: 30px; align-items: center; }
+        .nav-center a { color: var(--white); font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; opacity: 0.9; }
+        .nav-center a:hover { opacity: 1; color: var(--gold); }
+        .nav-right { display: flex; align-items: center; gap: 20px; }
+        .nav-right .phone { color: var(--white); font-size: 12px; font-weight: 600; }
+        .btn-enquire { background: var(--accent); color: var(--white); padding: 10px 24px; font-size: 11px; font-weight: 800; text-transform: uppercase; border-radius: 2px; transition: transform 0.2s ease, background 0.2s; }
+        .btn-enquire:hover { background: #d81b60; transform: translateY(-1px); }
+
+        /* Hero Section */
+        .hero {
+            position: relative; height: 100vh; width: 100%;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            text-align: center; color: var(--white); 
+            background: url('https://images.unsplash.com/photo-1548678967-f1fc5d33934f?q=80&w=2070&auto=format&fit=crop') center center / cover no-repeat;
+        }
+        .hero::before { content: ''; position: absolute; inset: 0; background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.5)); z-index: 1; }
+        .hero-content { z-index: 2; max-width: 900px; padding: 0 20px; animation: fadeIn 1.2s ease-out; }
+        .hero-content h1 { font-family: 'Inter', sans-serif; font-weight: 800; font-size: clamp(2.5rem, 8vw, 5rem); letter-spacing: 4px; text-transform: uppercase; margin-bottom: 20px; line-height: 1.1; }
+        .hero-content p { font-size: 11px; letter-spacing: 3px; margin-bottom: 40px; text-transform: uppercase; font-weight: 400; max-width: 600px; margin-left: auto; margin-right: auto; opacity: 0.9; }
+        .hero-btns { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
+        .btn-base { padding: 14px 28px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; transition: var(--transition-smooth); }
+        .btn-outline { border: 1px solid var(--white); color: var(--white); background: transparent; }
+        .btn-outline:hover { background: var(--white); color: var(--dark); }
+        .btn-solid { background: #000; color: var(--white); border: 1px solid #000; }
+        .btn-solid:hover { background: #333; border-color: #333; }
+        .scroll-indicator { position: absolute; bottom: 30px; z-index: 2; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; opacity: 0.8; animation: bounce 2s infinite; }
+
+        /* Moves Us Section */
+        .moves-us-section { padding: 80px 0 80px; background: var(--white); overflow: hidden; width: 100%; }
+        .moves-header-container { padding: 0 6%; margin-bottom: 30px; }
+        .moves-subhead { font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--dark); margin-bottom: 0px; display: block; }
+        .moves-title { font-family: 'Inter', sans-serif; font-size: clamp(3rem, 6vw, 5rem); font-weight: 900; text-transform: uppercase; letter-spacing: -2px; line-height: 0.9; color: var(--dark); margin: 0; }
+        .moves-slider { display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 20px 6%; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+        .moves-slider::-webkit-scrollbar { display: none; }
+        .move-card { position: relative; flex: 0 0 420px; height: 420px; scroll-snap-align: center; border-radius: 4px; overflow: hidden; cursor: pointer; transition: transform 0.3s ease; }
+        @media(max-width: 768px) { .move-card { flex: 0 0 85vw; height: 85vw; } }
+        .move-card:hover { transform: scale(0.99); }
+        .move-bg { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+        .move-card:hover .move-bg { transform: scale(1.05); }
+        .move-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.8) 100%); transition: background 0.3s ease; }
+        .move-card.active .move-overlay { background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0.95) 100%); }
+        .move-content { position: absolute; bottom: 0; left: 0; width: 100%; padding: 30px; color: var(--white); z-index: 10; }
+        .move-text-wrap { transform: translateY(0); transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+        .move-card.active .move-text-wrap { transform: translateY(-10px); }
+        .move-card-title { font-family: 'Inter', sans-serif; font-size: 1.5rem; font-weight: 700; line-height: 1.1; margin-bottom: 5px; text-transform: capitalize; }
+        .move-desc { font-family: 'Inter', sans-serif; font-size: 0.95rem; font-weight: 400; line-height: 1.5; color: rgba(255,255,255,0.9); max-height: 0; overflow: hidden; opacity: 0; transition: all 0.4s ease; }
+        .move-card.active .move-desc { max-height: 100px; opacity: 1; margin-top: 10px; }
+        .move-btn { position: absolute; bottom: 30px; right: 30px; width: 32px; height: 32px; background: transparent; border: none; color: white; font-size: 24px; font-weight: 300; display: flex; align-items: center; justify-content: center; transition: transform 0.3s ease; }
+        .move-card.active .move-btn { transform: rotate(45deg); }
+        .moves-bottom-bar { padding: 40px 6% 0; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; }
+        .moves-cta-wrapper { grid-column: 2; text-align: center; }
+        .moves-action-btn { display: inline-block; background: var(--dark); color: var(--white); padding: 16px 45px; font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; border-radius: 30px; transition: transform 0.2s, background 0.2s; }
+        .moves-action-btn:hover { background: #333; transform: scale(1.02); }
+        .moves-controls { grid-column: 3; display: flex; justify-content: flex-end; gap: 15px; }
+        .control-arrow { width: 44px; height: 44px; border-radius: 50%; background: #f0f0f0; border: none; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.2s; color: var(--dark); font-size: 18px; }
+        .control-arrow:hover { background: #e0e0e0; }
+        @media(max-width: 768px) { .moves-bottom-bar { display: flex; flex-direction: column; gap: 20px; } .moves-controls { display: none; } }
+
+   .manifesto-section {
+        position: relative;
+        z-index: 0;
+        background: url('manifesto-bg.jpg') center center / cover no-repeat;
+        color: #ffffff;
+        padding: 80px 6%;
+        width: 100%;
+    }
+
+    .manifesto-section::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.6);
+        z-index: -1;
+    }
+
+        .manifesto-container { border-top: 1px solid rgba(255, 255, 255, 0.9); padding-top: 25px; display: grid; grid-template-columns: 1.5fr 1fr; gap: 60px; align-items: start; }
+        .manifesto-headline { font-family: 'Inter', sans-serif; font-weight: 900; font-size: clamp(3rem, 7vw, 6.5rem); line-height: 0.85; text-transform: uppercase; letter-spacing: -2px; color: #ffffff; margin: 0; max-width: 100%; }
+        .manifesto-desc { font-family: 'Inter', sans-serif; font-size: 1rem; line-height: 1.5; color: #ffffff; font-weight: 600; max-width: 480px; justify-self: end; margin-top: 5px; }
+        @media(max-width: 900px) { .manifesto-container { grid-template-columns: 1fr; gap: 30px; } .manifesto-headline { font-size: 4rem; letter-spacing: -1px; } .manifesto-desc { justify-self: start; max-width: 100%; } }
+
+        /* Experiences Section */
+        .offers-section { padding: 80px 6%; background: var(--white); }
+        .offers-title { font-family: 'Inter', sans-serif; font-size: clamp(3rem, 6vw, 5rem); font-weight: 900; letter-spacing: -2px; line-height: 0.9; text-transform: uppercase; margin-bottom: 60px; color: var(--dark); text-align: center; }
+        
+        /* --- NEW EXPERIENCE CARD DESIGN START --- */
+        .offers-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; max-width: 1200px; margin: 0 auto; }
+        @media(max-width: 900px) { .offers-grid { grid-template-columns: 1fr; gap: 40px; } }
+
+        .ref-card {
+            background: #F9F9F9; /* Light neutral background */
+            border-radius: 24px; /* Large rounded corners */
+            box-shadow: 0 10px 40px rgba(0,0,0,0.06); /* Soft drop shadow */
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .ref-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.1);
+        }
+
+        .ref-card-img-wrap {
+            position: relative;
+            width: 100%;
+            height: 260px;
+        }
+
+        .ref-card-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+
+        /* PRICE REPLACES HEART ICON POSITION */
+        .ref-price-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #ffffff;
+            color: var(--dark);
+            padding: 8px 16px;
+            border-radius: 100px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 800;
+            font-size: 0.95rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            z-index: 2;
+        }
+
+        .ref-card-content {
+            padding: 24px 28px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .ref-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: #1A1A1A;
+            margin-bottom: 4px;
+            line-height: 1.2;
+        }
+
+        .ref-location {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #949494; /* Muted gray */
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+
+        .ref-desc {
+            font-size: 0.95rem;
+            color: #666; /* Light gray paragraph */
+            line-height: 1.6;
+            margin-bottom: 24px;
+            font-weight: 400;
+        }
+
+        .ref-divider {
+            width: 100%;
+            height: 1px;
+            background: #E5E5E5;
+            margin-bottom: 20px;
+        }
+
+        .ref-meta-row {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .ref-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #666;
+        }
+        
+        .ref-meta-item i {
+            font-size: 0.9rem;
+            color: #999;
+        }
+
+        .ref-action-row {
+            margin-top: auto;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .btn-see-more {
+            background-color: #2563EB; /* Solid Blue */
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            padding: 10px 24px;
+            border-radius: 100px; /* Pill shape */
+            transition: background 0.3s;
+        }
+        
+        .btn-see-more:hover {
+            background-color: #1d4ed8;
+        }
+        /* --- NEW EXPERIENCE CARD DESIGN END --- */
+
+        /* Testimonials */
+        .testimonials-section { padding: 80px 6%; background: var(--white); border-top: 1px solid #f0f0f0; }
+        .testimonials-header { font-family: 'Inter', sans-serif; font-size: clamp(3rem, 6vw, 5rem); font-weight: 900; letter-spacing: -2px; line-height: 0.9; text-transform: uppercase; margin-bottom: 60px; color: var(--dark); text-align: left; }
+        
+        .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; max-width: 1200px; margin: 0 auto; }
+        
+        .testi-card { background: #F8F9FA; border-radius: 24px; padding: 40px 30px; display: flex; flex-direction: column; height: 100%; transition: transform 0.2s; }
+        .testi-card:hover { transform: translateY(-3px); }
+        
+        .testi-quote-icon { color: #E5E7EB; font-size: 24px; margin-bottom: 20px; }
+        
+        .testi-text { font-family: 'Inter', sans-serif; font-size: 1rem; color: #374151; line-height: 1.7; text-align: center; margin-bottom: 30px; flex-grow: 1; }
+        
+        .testi-author-area { display: flex; align-items: center; gap: 15px; margin-top: auto; }
+        .testi-avatar { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; }
+        .testi-meta { display: flex; flex-direction: column; justify-content: center; }
+        .testi-name { font-weight: 700; font-size: 0.95rem; color: #111827; line-height: 1.2; }
+        .testi-handle { font-size: 0.85rem; color: #9CA3AF; font-weight: 400; }
+
+        @media(max-width: 900px) { .testimonials-grid { grid-template-columns: 1fr; } }
+
+        /* Process View */
+        #process-view { display: none; width: 100%; animation: fadeInPage 0.8s ease; }
+        .process-hero { background: var(--dark); color: var(--white); padding: 160px 6% 80px; text-align: center; }
+        .process-breadcrumbs { font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: rgba(255,255,255,0.5); margin-bottom: 20px; }
+        .process-hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 15px; line-height: 1.1; }
+        .process-hero p { font-size: 1.1rem; color: rgba(255,255,255,0.8); font-weight: 300; }
+        .process-content { padding: 100px 6%; background: var(--white); }
+        .process-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; max-width: 1200px; margin: 0 auto; align-items: center; }
+        .process-images { position: relative; }
+        .process-img-main { width: 85%; height: 500px; object-fit: cover; border-radius: 4px; }
+        .process-img-accent { position: absolute; bottom: -30px; right: 0; width: 50%; height: 300px; object-fit: cover; border: 8px solid var(--white); box-shadow: 0 10px 40px rgba(0,0,0,0.1); border-radius: 4px; }
+        .process-text h2 { font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; font-weight: 800; }
+        .process-text h3 { font-size: 2.5rem; margin-bottom: 25px; line-height: 1.2; color: var(--dark); }
+        .process-text p { color: #666; margin-bottom: 30px; font-size: 1rem; line-height: 1.8; }
+        .process-steps { list-style: none; display: flex; flex-direction: column; gap: 20px; }
+        .process-steps li { display: flex; align-items: flex-start; gap: 15px; }
+        .step-icon { width: 24px; height: 24px; border-radius: 50%; background: var(--bg-linen); color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 800; flex-shrink: 0; margin-top: 3px; }
+        .step-text { font-size: 0.95rem; color: var(--dark); font-weight: 500; }
+        .process-metrics { background: var(--bg-linen); padding: 80px 6%; border-top: 1px solid #eee; border-bottom: 1px solid #eee; }
+        .metrics-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; max-width: 1200px; margin: 0 auto; text-align: center; }
+        .metric-item strong { display: block; font-family: 'Playfair Display', serif; font-size: 3rem; color: var(--primary); margin-bottom: 5px; line-height: 1; }
+        .metric-item span { font-family: 'Inter', sans-serif; font-size: 0.75rem; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 700; color: var(--dark); }
+        .process-cta { background: var(--dark); color: white; padding: 80px 6%; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 25px; }
+        .process-cta h2 { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 400; }
+        .process-cta p { color: rgba(255,255,255,0.7); max-width: 500px; }
+
+        @keyframes fadeInPage { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 40% {transform: translateY(-10px);} 60% {transform: translateY(-5px);} }
+
+     
+
+        /* ========================================= */
+        /* NEW FINAL SECTION (CTA + FAQ) - PILL     */
+        /* ========================================= */
+        
+        /* Container for the Pill Section */
+        .final-pill-section {
+            width: 95%;
+            max-width: 1300px;
+            margin: 0 auto 40px; /* Spacing from bottom */
+            border-radius: 60px; /* Very Large Rounded Corners */
+            overflow: hidden;
+            position: relative;
+            background-color: #D4AF37; /* Fallback: Warm Mustard */
+            
+            background-image: url('belong-heart.jpg');
+            background-size: cover;
+            background-position: center 40%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            color: #fff;
+            padding: 80px 80px;
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Split Layout */
+            gap: 60px;
+            align-items: center;
+        }
+
+        /* Dark Overlay to make text readable */
+        .final-pill-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, rgba(0,0,0,0.6) 0%, rgba(180, 140, 40, 0.4) 100%);
+            z-index: 1;
+        }
+
+        /* Ensure content sits above overlay */
+        .pill-content-left, .pill-content-right {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* LEFT COLUMN */
+        .pill-headline {
+            font-family: 'Inter', sans-serif;
+            font-weight: 800;
+            font-size: clamp(2.5rem, 4vw, 3.5rem);
+            line-height: 1.1;
+            margin-bottom: 30px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .pill-contact-list {
+            margin-bottom: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .pill-contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+        .pill-contact-item i {
+            font-size: 1.2rem;
+            width: 20px;
+            text-align: center;
+        }
+
+        .pill-socials {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        .pill-socials a {
+            color: white;
+            font-size: 1.2rem;
+            transition: transform 0.2s;
+        }
+        .pill-socials a:hover {
+            transform: translateY(-3px);
+            color: #00BCD4; /* Teal hint on hover */
+        }
+
+        .btn-pill-primary {
+            display: inline-block;
+            background: #00BCD4; /* Bright Cyan/Teal */
+            color: white;
+            padding: 18px 40px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 10px 25px rgba(0, 188, 212, 0.3);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .btn-pill-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 35px rgba(0, 188, 212, 0.4);
+            background: #00acc1;
+        }
+
+        /* RIGHT COLUMN (FAQ) */
+        .pill-faq-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+        }
+
+        .pill-faq-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0; /* No gap, using borders */
+            margin-bottom: 30px;
+        }
+
+        .pill-faq-item {
+            border-bottom: 1px solid rgba(255,255,255,0.3);
+            padding: 15px 0;
+            cursor: pointer;
+        }
+        .pill-faq-item:first-child {
+            border-top: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .pill-faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+        .pill-faq-icon {
+            transition: transform 0.3s ease;
+        }
+        .pill-faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.8);
+            margin-top: 0;
+        }
+        .pill-faq-item.active .pill-faq-answer {
+            max-height: 100px; /* Expand */
+            margin-top: 10px;
+        }
+        .pill-faq-item.active .pill-faq-icon {
+            transform: rotate(180deg);
+        }
+
+        .btn-pill-outline {
+            display: inline-block;
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            float: right; /* Bottom right alignment */
+            transition: 0.3s;
+        }
+        .btn-pill-outline:hover {
+            background: white;
+            color: #D4AF37;
+        }
+
+        @media (max-width: 900px) {
+            .final-pill-section {
+                grid-template-columns: 1fr;
+                padding: 40px 30px;
+                border-radius: 30px;
+                text-align: center;
+                background-position: center;
+            }
+            .pill-content-left {
+                margin-bottom: 40px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            .pill-contact-item {
+                justify-content: center;
+            }
+            .btn-pill-outline {
+                float: none;
+                margin-top: 20px;
+            }
+            .pill-faq-question {
+                text-align: left;
+            }
+        }
+/* ========================================= */
+    /* MOBILE OPTIMIZATION (Add at bottom of CSS)*/
+    /* ========================================= */
+    @media (max-width: 768px) {
+        
+        /* 1. FIX HEADER NAVIGATION */
+        /* Stacks the logo/button on top and links below for easy clicking */
+        header, header.scrolled {
+            flex-wrap: wrap;
+            padding: 15px 5%;
+            background: rgba(0,0,0,0.95); /* Always dark so white text is readable */
+            position: relative; /* Un-fixes header so it doesn't cover screen content */
+        }
+
+        .brand-image {
+            height: 35px; /* Slightly smaller logo */
+        }
+
+        .nav-center {
+            order: 3; /* Moves links below the logo and button */
+            width: 100%;
+            justify-content: center;
+            margin-top: 15px;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .nav-center a {
+            font-size: 10px; /* Smaller font for links */
+            padding: 5px 0;
+        }
+
+        .nav-right {
+            margin-left: auto; /* Pushes button to the right */
+        }
+
+        /* 2. OPTIMIZE HERO SECTION */
+        /* Overrides the inline HTML styles to fit phone screens */
+        .hero-content h1 {
+            font-size: 2.2rem !important; 
+            line-height: 1.2 !important;
+        }
+        
+        .hero-content p {
+            white-space: normal !important; /* Allows text to wrap naturally */
+            font-size: 0.9rem !important;
+            padding: 0 10px;
+        }
+
+        /* 3. REDUCE BLANK SPACE (PADDING) */
+        /* 80px is too big for mobile, 40px is cleaner */
+        .moves-us-section, 
+        .manifesto-section, 
+        .offers-section, 
+        .testimonials-section,
+        .process-content,
+        .process-cta {
+            padding: 50px 5%;
+        }
+
+        /* 4. FIX MANIFESTO TEXT SIZE */
+        .manifesto-headline {
+            font-size: 2.8rem; /* Prevents giant text from breaking layout */
+        }
+        
+        .manifesto-container {
+            gap: 30px;
+        }
+
+        /* 5. PILL/FOOTER SECTION */
+        /* Removes huge margins and makes it full width */
+        .final-pill-section {
+            width: 100%;
+            border-radius: 0;
+            margin-bottom: 0;
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        .pill-contact-list, .pill-socials {
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .btn-pill-outline {
+            width: 100%;
+            text-align: center;
+            float: none;
+        }
+    }
+    </style>
+</head>
+<body>
+
+   <header id="main-header">
+ 
+        <div class="container header-inner">
+            <a href="#" class="brand-logo">
+                <img src="ouiranna.logo.png" alt="Ouiranna Logo" class="brand-image">
+            </a>
+        </div>
+    
+
+    <nav class="nav-center">
+        <a href="#" onclick="showHome(); document.getElementById('experiences').scrollIntoView(); return false;">Experiences</a>
+        <a href="aboutus.html">About Us</a>
+        <a href="essaouira.html">Essaouira</a>
+    </nav>
+
+ <div class="nav-right">
+    <a href="contact.html" class="btn-enquire">Contact Us</a>
+</div>
+</header>
+
+<div id="home-view">
+    <section class="hero" style="display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative; overflow: hidden;">
+        <video autoplay muted loop playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1;">
+            <source src="hero-video.mp4" type="video/mp4">
+        </video>
+
+        <div class="hero-content" style="text-align: center; position: relative; z-index: 1;">
+            <h1 style="font-size: 2rem; line-height: 1.2;">Open your heart<br>To the world</h1>
+            
+            <p style="font-size: 0.75rem; white-space: nowrap;">Our Universe Inspires Real Affection, Nurturing New Attitudes</p>
+
+            <div class="hero-btns" style="display: flex; justify-content: center;">
+                <button onclick="document.getElementById('experiences').scrollIntoView()" class="btn-base btn-outline">
+                    Explore Our Experiences
+                </button>
+            </div>
+        </div>
+        <div class="scroll-indicator" style="position: absolute; bottom: 35px; left: 48,5%; transform: translateX(-50%); z-index: 2; letter-spacing: 2px; opacity: 0.8;">Scroll</div>
+    </section>
+
+    <section class="moves-us-section"id="what-opens-our-hearts" style="scroll-margin-top: 150px;">
+        <div class="moves-header-container">
+            <span class="moves-subhead">More Than Travel</span>
+            <h2 class="moves-title">WHAT OPENS OUR HEARTS</h2>
+        </div>
+
+        <div class="moves-slider" id="movesSlider">
+            <article class="move-card" onclick="toggleMoveCard(this)">
+                <img src="heart-01.jpg">
+                <div class="move-overlay"></div>
+                <div class="move-content">
+                    <div class="move-text-wrap">
+                        <h3 class="move-card-title">when YOU are seen</h3>
+                        <p class="move-desc">Being seen makes you real.</p>
+                    </div>
+                </div>
+                <button class="move-btn">+</button>
+            </article>
+
+            <article class="move-card" onclick="toggleMoveCard(this)">
+                <img src="heart-02.jpg">
+                <div class="move-overlay"></div>
+                <div class="move-content">
+                    <div class="move-text-wrap">
+                        <h3 class="move-card-title">when YOU are safe</h3>
+                        <p class="move-desc">Safety lets your heart rest.</p>
+                    </div>
+                </div>
+                <button class="move-btn">+</button>
+            </article>
+
+            <article class="move-card" onclick="toggleMoveCard(this)">
+                <img src="heart-03.jpg">
+                <div class="move-overlay"></div>
+                <div class="move-content">
+                    <div class="move-text-wrap">
+                        <h3 class="move-card-title">when YOU matter</h3>
+                        <p class="move-desc">Meaning gives you a place.</p>
+                    </div>
+                </div>
+                <button class="move-btn">+</button>
+            </article>
+
+            <article class="move-card" onclick="toggleMoveCard(this)">
+                <img src="heart-04.jpg">
+                <div class="move-overlay"></div>
+                <div class="move-content">
+                    <div class="move-text-wrap">
+                        <h3 class="move-card-title">when YOU belong</h3>
+                        <p class="move-desc"> Love tells you , you belong.</p>
+                    </div>
+                </div>
+                <button class="move-btn">+</button>
+            </article>
+        </div>
+
+        <div class="moves-bottom-bar">
+            <div></div>
+
+            <div class="moves-cta-wrapper">
+                <a href="aboutus.html" class="moves-action-btn">About Us</a>
+            </div>
+
+            <div class="moves-controls">
+                <button class="control-arrow" onclick="scrollMoves(-1)" aria-label="Scroll Left">←</button>
+                <button class="control-arrow" onclick="scrollMoves(1)" aria-label="Scroll Right">→</button>
+            </div>
+        </div>
+    </section>
+    
+    <section class="manifesto-section">
+        <div class="manifesto-container">
+            <h2 class="manifesto-headline">
+                IF YOU HAVE A HEART<br>
+                YOU BELONG.*<br>
+               
+            </h2>
+            <p class="manifesto-desc">
+                *These words express who Ouiranna is and what we believe , that belonging begins with openness. Inspired by the universe, we nurture real affection and new attitudes that bring people closer to the world and to each other.
+            </p>
+        </div>
+    </section>
+
+    <section class="offers-section" id="experiences">
+       <h2 class="offers-title" style="text-align: left;">MADE WITH HEART</h2>
+        
+        <div class="offers-grid">
+    
+    <div class="ref-card">
+        <div class="ref-card-img-wrap">
+            <img src="https://images.unsplash.com/photo-1541518763531-d371f5e50a21?auto=format&fit=crop&w=800" class="ref-card-img" alt="Family Dining">
+            <div class="ref-price-badge">45€</div>
+        </div>
+        <div class="ref-card-content">
+            <h3 class="ref-title">Family Dining</h3>
+            <div class="ref-location">Medina, Essaouira</div>
+            <p class="ref-desc">Share a traditional meal in a local home, crafted with love.</p>
+            
+            <div class="ref-divider"></div>
+
+            <div class="ref-meta-row">
+                <div class="ref-meta-item">
+                    <i class="far fa-clock"></i> 2.5 Hrs
+                </div>
+                <div class="ref-meta-item">
+                    <i class="far fa-sun"></i> Lunch/Dinner
+                </div>
+                <div class="ref-meta-item">
+                    <i class="fas fa-mug-hot"></i> Warm
+                </div>
+            </div>
+
+            <div class="ref-action-row">
+                <a href="booking.html?experience=family-dining" class="btn-see-more">See more</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="ref-card">
+        <div class="ref-card-img-wrap">
+            <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=800" class="ref-card-img" alt="Darija Intro">
+            <div class="ref-price-badge">30€</div>
+        </div>
+        <div class="ref-card-content">
+            <h3 class="ref-title">Darija Intro</h3>
+            <div class="ref-location">Rooftop, Essaouira</div>
+            <p class="ref-desc">Unlock the heart of Morocco with a language session.</p>
+            
+            <div class="ref-divider"></div>
+
+            <div class="ref-meta-row">
+                <div class="ref-meta-item">
+                    <i class="far fa-clock"></i> 1 Hr
+                </div>
+                <div class="ref-meta-item">
+                    <i class="far fa-sun"></i> Morning
+                </div>
+                <div class="ref-meta-item">
+                    <i class="far fa-smile"></i> Fun
+                </div>
+            </div>
+
+            <div class="ref-action-row">
+                <a href="booking.html?experience=darija-intro" class="btn-see-more">See more</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="ref-card">
+        <div class="ref-card-img-wrap">
+            <img src="https://images.unsplash.com/photo-1516550893885-aa876a45ca7a?auto=format&fit=crop&w=800" class="ref-card-img" alt="Medina Walk">
+            <div class="ref-price-badge">35€</div>
+        </div>
+        <div class="ref-card-content">
+            <h3 class="ref-title">Hidden Medina Walk</h3>
+            <div class="ref-location">Medina, Essaouira</div>
+            <p class="ref-desc">Discover the secret alleys and hidden artisans of the old city.</p>
+            
+            <div class="ref-divider"></div>
+
+            <div class="ref-meta-row">
+                <div class="ref-meta-item">
+                    <i class="far fa-clock"></i> 2 Hrs
+                </div>
+                <div class="ref-meta-item">
+                    <i class="far fa-sun"></i> Afternoon
+                </div>
+                <div class="ref-meta-item">
+                    <i class="fas fa-walking"></i> Active
+                </div>
+            </div>
+
+            <div class="ref-action-row">
+                <a href="booking.html?experience=medina-walk" class="btn-see-more">See more</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+    </section>
+
+   <section class="testimonials-section">
+        <h2 class="testimonials-header">HEART STORIES</h2>
+        <div class="testimonials-grid">
+            
+            <div class="testi-card">
+                <i class="fas fa-quote-left testi-quote-icon"></i>
+                <p class="testi-text">"Essaouira came alive for us in ways we never expected. The local immersion was truly magical and unlike anything else."</p>
+                <div class="testi-author-area">
+                    <img src="https://randomuser.me/api/portraits/women/44.jpg" class="testi-avatar" alt="Sarah Jenkins">
+                    <div class="testi-meta">
+                        <span class="testi-name">Sarah Jenkins</span>
+                        <span class="testi-handle">@sarah_travels</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testi-card">
+                <i class="fas fa-quote-left testi-quote-icon"></i>
+                <p class="testi-text">"Professional, warm, and deeply authentic. Every detail was handled with care. Highly recommended for luxury travelers."</p>
+                <div class="testi-author-area">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" class="testi-avatar" alt="Marc Dubois">
+                    <div class="testi-meta">
+                        <span class="testi-name">Marc Dubois</span>
+                        <span class="testi-handle">@marcdubois</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testi-card">
+                <i class="fas fa-quote-left testi-quote-icon"></i>
+                <p class="testi-text">"We felt like family, not tourists. The photography tour opened my eyes to the colors of the Medina."</p>
+                <div class="testi-author-area">
+                    <img src="https://randomuser.me/api/portraits/women/65.jpg" class="testi-avatar" alt="Elena Ross">
+                    <div class="testi-meta">
+                        <span class="testi-name">Elena Ross</span>
+                        <span class="testi-handle">@elenaross_nyc</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="final-pill-section">
+        <div class="pill-content-left">
+            <h1 class="pill-headline">Belong your heart</h1>
+            
+            <div class="pill-contact-list">
+                <div class="pill-contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>ouiranna.sejour@gmail.com</span>
+                </div>
+                <div class="pill-contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span>+212696809738</span>
+                </div>
+            </div>
+
+            <div class="pill-socials">
+    <a href="https://www.instagram.com/ouiranna" target="_blank">
+        <i class="fab fa-instagram"></i>
+    </a>
+
+    <a href="https://www.facebook.com/Ouiranna-Sejour" target="_blank">
+        <i class="fab fa-facebook-f"></i>
+    </a>
+
+    <a href="https://twitter.com/ouiranna" target="_blank">
+        <i class="fab fa-twitter"></i>
+    </a>
+</div>
+            <a href="aboutus.html" class="btn-pill-primary">about us</a>
+        </div>
+
+        <div class="pill-content-right">
+            <div class="pill-faq-title">Frequently Asked Questions</div>
+            
+            <div class="pill-faq-list">
+                <div class="pill-faq-item" onclick="toggleFaq(this)">
+                    <div class="pill-faq-question">
+                        I don’t know much about Moroccan culture. Is that a problem?
+                        <i class="fas fa-chevron-down pill-faq-icon"></i>
+                    </div>
+                    <div class="pill-faq-answer">
+                        <p>Not at all. Experiences are welcoming, simple, and explained step by step, perfect for first-time visitors</p>
+                    </div>
+                </div>
+
+                <div class="pill-faq-item" onclick="toggleFaq(this)">
+                    <div class="pill-faq-question">
+                        What feeling will I leave with?
+                        <i class="fas fa-chevron-down pill-faq-icon"></i>
+                    </div>
+                    <div class="pill-faq-answer">
+                        <p>Belonging. Understanding. And a deeper connection to the people, the culture, and yourself.</p>
+                    </div>
+                </div>
+
+                <div class="pill-faq-item" onclick="toggleFaq(this)">
+                    <div class="pill-faq-question">
+                        What if I don’t speak the language?
+                        <i class="fas fa-chevron-down pill-faq-icon"></i>
+                    </div>
+                    <div class="pill-faq-answer">
+                        <p>That’s part of the beauty. We bridge cultures through stories, smiles, and human connection.</p>
+                    </div>
+                </div>
+            </div>
+
+            <a href="contact.html" class="btn-pill-outline">Contact Us for More Info</a>
+        </div>
+    </section>
+
+</div> 
+
+<div id="process-view">
+    <div class="process-hero">
+        <div class="process-breadcrumbs">Home / About</div>
+        <h1>THE ART OF CRAFTING<br>YOUR JOURNEY</h1>
+        <p>A meticulous approach to bespoke travel design.</p>
+    </div>
+    <div class="process-content">
+        <div class="process-layout">
+            <div class="process-images">
+                <img src="https://images.unsplash.com/photo-1539020140153-e479b8c22e70?q=80&w=2070&auto=format&fit=crop" class="process-img-main" alt="Process Main">
+                <img src="https://images.unsplash.com/photo-1544644181-1484b3fdfc62?q=80&w=2088&auto=format&fit=crop" class="process-img-accent" alt="Process Accent">
+            </div>
+            <div class="process-text">
+                <h2>OUR METHOD</h2>
+                <h3>Precision & Passion</h3>
+                <p>We believe travel should be effortless for you, but rigorous for us. Our team spends hundreds of hours curating every detail.</p>
+                <ul class="process-steps">
+                    <li><div class="step-icon">1</div><div class="step-text">Initial Consultation & Vision Setting</div></li>
+                    <li><div class="step-icon">2</div><div class="step-text">Design & Refinement of Itinerary</div></li>
+                    <li><div class="step-icon">3</div><div class="step-text">Seamless Execution & 24/7 Support</div></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="process-metrics">
+        <div class="metrics-grid">
+            <div class="metric-item"><strong>20+</strong><span>Years Experience</span></div>
+            <div class="metric-item"><strong>500+</strong><span>Happy Travelers</span></div>
+            <div class="metric-item"><strong>100%</strong><span>Tailor Made</span></div>
+            <div class="metric-item"><strong>24/7</strong><span>Local Support</span></div>
+        </div>
+    </div>
+    <div class="process-cta">
+        <h2>Ready to start your journey?</h2>
+        <p>Let us design the perfect Essaouira experience for you.</p>
+        <button onclick="showHome(); document.getElementById('experiences').scrollIntoView()" class="btn-enquire">Explore Experiences</button>
+    </div>
+    <footer>
+        <div style="text-align:center; color: #666; font-size: 12px;">&copy; 2024 OUIRANNA. All rights reserved.</div>
+    </footer>
+</div>
+
+
+<script>
+    // --- NAVIGATION LOGIC ---
+    function showHome() {
+        document.getElementById('home-view').style.display = 'block';
+        document.getElementById('process-view').style.display = 'none';
+        window.scrollTo(0,0);
+    }
+    
+    function showProcess() {
+        document.getElementById('home-view').style.display = 'none';
+        document.getElementById('process-view').style.display = 'block';
+        window.scrollTo(0,0);
+    }
+
+    // --- NIKE STYLE SECTION LOGIC ---
+    function toggleMoveCard(card) {
+        // Close all other cards
+        document.querySelectorAll('.move-card').forEach(c => {
+            if(c !== card) c.classList.remove('active');
+        });
+        // Toggle current
+        card.classList.toggle('active');
+    }
+
+    // NEW SCROLL LOGIC
+    function scrollMoves(direction) {
+        const slider = document.getElementById('movesSlider');
+        // Scroll amount approx one card width + gap (420 + 20)
+        const scrollAmount = 440;
+        slider.scrollBy({ left: scrollAmount * direction, behavior: 'smooth' });
+    }
+
+   
+
+    // --- TESTIMONIAL SLIDER ---
+    function slideTestimonial(index) {
+        const track = document.getElementById('testimonial-track');
+        track.style.transform = `translateX(-${index * 33.33}%)`; // Shift by 1/3 since width is 300%
+        
+        document.querySelectorAll('.dot').forEach((dot, i) => {
+            dot.classList.toggle('active', i === index);
+        });
+    }
+
+    // --- NEW FAQ ACCORDION LOGIC ---
+    function toggleFaq(item) {
+        // Close others
+        document.querySelectorAll('.pill-faq-item').forEach(i => {
+            if(i !== item) i.classList.remove('active');
+        });
+        // Toggle clicked
+        item.classList.toggle('active');
+    }
+
+    // --- HEADER SCROLL ---
+    window.addEventListener('scroll', () => {
+        const header = document.getElementById('main-header');
+        if(window.scrollY > 50) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    });
+</script>
+
+</body>
+</html>

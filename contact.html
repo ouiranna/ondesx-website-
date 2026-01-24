@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Vigraph Studio</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-body: #ffffff;
+            --bg-card: #ffffff;
+            --bg-input: #ffffff;
+            --color-main: #000000;
+            --color-inverse: #ffffff;
+            --color-gray: #555555;
+            --color-border: #000000;
+            --font-main: 'Poppins', sans-serif;
+            --container-width: 1200px;
+            --header-height: 80px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-body);
+            color: var(--color-main);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.3s ease; }
+        ul { list-style: none; }
+        img { max-width: 100%; display: block; }
+
+        .container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .text-muted { color: var(--color-gray); }
+        .flex-center { display: flex; align-items: center; justify-content: center; }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 35px;
+            border-radius: 50px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--color-main);
+            color: var(--color-main);
+        }
+        .btn-outline:hover {
+            background: var(--color-main);
+            color: var(--color-inverse);
+        }
+
+        .btn-white {
+            background: #ffffff;
+            color: #000000;
+            border: 1px solid #ffffff;
+            font-weight: 600;
+        }
+        .btn-white:hover {
+            background: transparent;
+            color: #ffffff;
+            border: 1px solid #ffffff;
+        }
+
+        .site-header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            height: var(--header-height);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: none;
+            background: transparent;
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: center; 
+            align-items: center;
+            width: 100%;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-transform: uppercase;
+            color: #ffffff;
+        }
+
+        .brand-icon {
+            font-size: 1.8rem;
+            color: #ffffff;
+        }
+
+        /* Styles added for Image Logo */
+        .brand-image {
+            height: 60px;
+            width: auto;
+            transform: translateY(12px); /* Moves header logo downward */
+        }
+        
+        /* Footer specific logo adjustment */
+        .footer-brand .brand-image {
+            height: 45px; /* Smaller than header logo */
+            transform: none; /* Reset position for footer */
+        }
+
+        .brand-text h1 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            line-height: 1;
+            letter-spacing: 1px;
+            margin: 0;
+            color: #ffffff;
+        }
+
+        .brand-text span {
+            font-size: 0.65rem;
+            letter-spacing: 2px;
+            display: block;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 400;
+            margin-top: 2px;
+        }
+
+        .page-hero {
+            position: relative;
+            height: 400px;
+            background-color: #ffffff;
+            background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('hero2.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding-top: var(--header-height);
+            color: #ffffff;
+        }
+
+        .page-title {
+            font-size: 3rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #ffffff;
+        }
+
+        .breadcrumb {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        .breadcrumb span { color: #ffffff; font-weight: 600; }
+
+        .contact-wrapper {
+            padding: 80px 0;
+            background-color: var(--bg-body);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+
+        .form-card {
+            background-color: var(--bg-card);
+            padding: 40px;
+            border-radius: 4px;
+            border: 1px solid #eeeeee;
+        }
+
+        .section-tag {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--color-gray);
+            margin-bottom: 5px;
+            text-transform: capitalize;
+        }
+
+        .section-heading {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 30px;
+            color: var(--color-main);
+        }
+
+        .form-group { margin-bottom: 20px; }
+
+        .form-input {
+            width: 100%;
+            background: transparent;
+            border: 1px solid var(--color-border);
+            padding: 16px 20px;
+            font-family: var(--font-main);
+            color: var(--color-main);
+            font-size: 0.9rem;
+            border-radius: 2px;
+            transition: 0.3s;
+        }
+
+        .form-input:focus {
+            border-color: #000000;
+            outline: none;
+            background: #f9f9f9;
+        }
+        
+        .form-input::placeholder {
+            color: #888;
+        }
+
+        textarea.form-input {
+            height: 140px;
+            resize: none;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: transparent;
+            color: var(--color-main);
+            border: 1px solid var(--color-main);
+            padding: 16px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: 0.3s;
+            margin-top: 10px;
+        }
+
+        .submit-btn:hover {
+            background: var(--color-main);
+            color: var(--color-inverse);
+        }
+
+        .info-desc {
+            color: var(--color-gray);
+            font-size: 0.95rem;
+            margin-bottom: 40px;
+            line-height: 1.7;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .info-box {
+            text-align: center;
+        }
+
+        .info-icon {
+            font-size: 1.6rem;
+            color: var(--color-main);
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+
+        .info-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 5px;
+            font-size: 1.05rem;
+            color: var(--color-main);
+        }
+
+        .info-value {
+            color: var(--color-gray);
+            font-size: 0.9rem;
+        }
+
+        .map-frame {
+            width: 100%;
+            height: 280px;
+            border-radius: 4px;
+            overflow: hidden;
+            background: #eee;
+            filter: grayscale(100%);
+        }
+        
+        .map-frame iframe { width: 100%; height: 100%; border: 0; }
+
+        .cta-section {
+            padding: 100px 0;
+            background-color: #000000;
+            background-image: url('cta.jpg');
+            background-size: cover;
+            background-position: center;
+            border-top: 1px solid #eee;
+            text-align: center;
+            position: relative;
+        }
+
+        .cta-sub {
+            display: block;
+            color: #ffffff;
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+
+        .cta-head {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 35px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            color: #ffffff;
+        }
+
+        .site-footer {
+            background-color: #000000;
+            color: #ffffff;
+            padding: 90px 0 30px;
+            font-size: 0.9rem;
+            border-top: none;
+        }
+
+        .footer-cols {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 0.5fr 1.5fr;
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .footer-brand .brand-logo, 
+        .footer-brand .brand-icon, 
+        .footer-brand .brand-text h1 {
+            color: #ffffff;
+        }
+        
+        .footer-brand .brand-text span {
+            color: #a1a1a1;
+        }
+
+        .footer-brand p {
+            color: #a1a1a1;
+            font-size: 0.85rem;
+            margin: 20px 0;
+            line-height: 1.6;
+            max-width: 300px;
+        }
+
+        .socials { display: flex; gap: 10px; }
+        .socials a {
+            width: 32px;
+            height: 32px;
+            background: #ffffff;
+            color: #000000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+        }
+        .socials a:hover { opacity: 0.8; }
+
+        .footer-heading {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 25px;
+            color: #ffffff;
+        }
+
+        .footer-links li { margin-bottom: 12px; }
+        .footer-links a { color: #a1a1a1; }
+        .footer-links a:hover { color: #ffffff; padding-left: 5px; }
+
+        .footer-contact li {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 18px;
+            color: #a1a1a1;
+            align-items: flex-start;
+        }
+
+        .footer-contact i {
+            color: #ffffff;
+            margin-top: 4px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #222;
+            padding-top: 25px;
+            text-align: center;
+            color: #555;
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 992px) {
+            .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+            .footer-cols { grid-template-columns: 1fr 1fr; gap: 40px; }
+            .map-frame { height: 350px; }
+        }
+
+        @media (max-width: 768px) {
+            .page-title { font-size: 2.2rem; }
+            .info-grid { grid-template-columns: 1fr; gap: 30px; }
+            .footer-cols { grid-template-columns: 1fr; }
+            .cta-head { font-size: 1.8rem; }
+            .section-heading { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="#" class="brand-logo">
+                <img src="ouiranna.logo.png" alt="Ouiranna Logo" class="brand-image">
+            </a>
+        </div>
+    </header>
+
+    <main id="linked-page">
+
+        <section class="page-hero">
+            <h1 class="page-title">Contact Us</h1>
+            <div class="breadcrumb">
+                Home / <span>Contact</span>
+            </div>
+        </section>
+
+        <section class="contact-wrapper">
+            <div class="container">
+                <div class="contact-grid">
+                    
+                    <div class="form-card">
+                        <span class="section-tag">Contact Us</span>
+                        <h2 class="section-heading">Get In Touch</h2>
+                        <form action="#">
+                            <div class="form-group">
+                                <input type="text" class="form-input" placeholder="Your Name...">
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-input" placeholder="example@yourmail.com">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-input" placeholder="Title...">
+                            </div>
+                            <div class="form-group">
+                                <textarea class="form-input" placeholder="Type Here..."></textarea>
+                            </div>
+                            <button type="submit" class="submit-btn">Send Now</button>
+                        </form>
+                    </div>
+
+                    <div class="info-column">
+                        <p class="info-desc">
+                            Our Universe Inspires Real Affection, Nurturing New Attitudes
+                        </p>
+
+                        <div class="info-grid">
+                            <div class="info-box">
+                                <i class="fa-solid fa-phone-volume info-icon"></i>
+                                <span class="info-label">Phone Number</span>
+                                <span class="info-value">+212696809738</span>
+                            </div>
+                            <div class="info-box">
+                                <i class="fa-regular fa-envelope info-icon"></i>
+                                <span class="info-label">Email Address</span>
+                                <span class="info-value">ouiranna.sejour@gmail.com</span>
+                            </div>
+                            <div class="info-box">
+                                <i class="fa-brands fa-whatsapp info-icon"></i>
+                                <span class="info-label">Whatsapp</span>
+                                <span class="info-value">+212696809738</span>
+                            </div>
+                            <div class="info-box">
+                                <i class="fa-solid fa-location-dot info-icon"></i>
+                                <span class="info-label">Our Office</span>
+                                <span class="info-value">Essaouira</span>
+                            </div>
+                        </div>
+
+                        <div class="map-frame">
+                            <iframe 
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d54536.36622409747!2d-9.799797076620956!3d31.50570743666568!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xdad9a4e9f588ccf%3A0x574f1d99d30009c!2sEssaouira%2C%20Morocco!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus"
+                                loading="lazy" 
+                                referrerpolicy="no-referrer-when-downgrade">
+                            </iframe>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <div class="container">
+                <span class="cta-sub">Discover Now</span>
+                <h2 class="cta-head">Open your heart To the world</h2>
+                <a href="index.html" class="btn btn-white">Get Started</a>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-cols">
+                
+                <div class="footer-brand">
+                    <div class="brand-logo">
+                        <img src="ouiranna.logo.png" alt="Ouiranna Logo" class="brand-image">
+                    </div>
+
+                    <p>Our Universe Inspires Real Affection, Nurturing New Attitudes</p>
+                    <div class="socials">
+                        <a href="https://www.facebook.com/profile.php?id=61577195343407"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/ouiranna?utm_source=qr"><i class="fa-brands fa-instagram"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-col"></div>
+
+                <div class="footer-col"></div>
+
+                <div class="footer-col">
+                    <h4 class="footer-heading">Get In Touch</h4>
+                    <ul class="footer-contact">
+                        <li>
+                            <i class="fa-solid fa-location-dot"></i>
+                            <span>Essaouira</span>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-phone"></i>
+                            <span>+212696809738</span>
+                        </li>
+                        <li>
+                            <i class="fa-brands fa-whatsapp"></i>
+                            <span>+212696809738</span>
+                        </li>
+                        <li>
+                            <i class="fa-regular fa-envelope"></i>
+                            <span>ouiranna.sejour@gmail.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                Copyright © 2025 OUIRANNA | Powered by OUIRANNA
+            
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
