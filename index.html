@@ -528,94 +528,148 @@
                 text-align: left;
             }
         }
-/* ========================================= */
-    /* MOBILE OPTIMIZATION (Add at bottom of CSS)*/
-    /* ========================================= */
-    @media (max-width: 768px) {
-        
-        /* 1. FIX HEADER NAVIGATION */
-        /* Stacks the logo/button on top and links below for easy clicking */
+/* ============================================== */
+    /* PREMIUM MOBILE OPTIMIZATION (Add at bottom)   */
+    /* ============================================== */
+    @media (max-width: 900px) {
+
+        /* 1. LUXURY HEADER LAYOUT */
+        /* Instead of squashing, we create a clean stacked layout */
         header, header.scrolled {
-            flex-wrap: wrap;
-            padding: 15px 5%;
-            background: rgba(0,0,0,0.95); /* Always dark so white text is readable */
-            position: relative; /* Un-fixes header so it doesn't cover screen content */
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 15px 20px;
+            background: rgba(10, 10, 10, 0.95); /* Dark cinematic background */
+            height: auto;
+            backdrop-filter: blur(10px); /* Frosted glass effect */
+        }
+
+        .header-inner {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
         }
 
         .brand-image {
-            height: 35px; /* Slightly smaller logo */
+            height: 32px; /* Refined logo size */
         }
 
+        /* Nav links become a sleek bottom bar in the header */
         .nav-center {
-            order: 3; /* Moves links below the logo and button */
             width: 100%;
-            justify-content: center;
-            margin-top: 15px;
-            gap: 15px;
-            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 0;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 15px;
         }
 
         .nav-center a {
-            font-size: 10px; /* Smaller font for links */
-            padding: 5px 0;
+            font-size: 10px;
+            letter-spacing: 1px;
+            padding: 5px;
         }
 
+        /* Position the Contact button absolutely for perfect alignment */
         .nav-right {
-            margin-left: auto; /* Pushes button to the right */
+            position: absolute;
+            top: 15px;
+            right: 20px;
+        }
+        
+        .btn-enquire {
+            padding: 8px 16px;
+            font-size: 10px;
         }
 
-        /* 2. OPTIMIZE HERO SECTION */
-        /* Overrides the inline HTML styles to fit phone screens */
+        /* 2. CINEMATIC HERO TEXT */
+        /* Fixes the "breaking" text and ensures readability */
         .hero-content h1 {
-            font-size: 2.2rem !important; 
-            line-height: 1.2 !important;
+            font-size: 2.4rem !important; /* Perfect size for phone portrait */
+            line-height: 1.15 !important;
+            margin-bottom: 15px;
         }
-        
+
         .hero-content p {
-            white-space: normal !important; /* Allows text to wrap naturally */
             font-size: 0.9rem !important;
-            padding: 0 10px;
+            white-space: normal !important; /* Lets text wrap naturally */
+            line-height: 1.6;
+            max-width: 90%;
+            margin: 0 auto 30px;
         }
 
-        /* 3. REDUCE BLANK SPACE (PADDING) */
-        /* 80px is too big for mobile, 40px is cleaner */
-        .moves-us-section, 
-        .manifesto-section, 
-        .offers-section, 
-        .testimonials-section,
-        .process-content,
-        .process-cta {
-            padding: 50px 5%;
-        }
-
-        /* 4. FIX MANIFESTO TEXT SIZE */
-        .manifesto-headline {
-            font-size: 2.8rem; /* Prevents giant text from breaking layout */
+        /* 3. "MOVES US" SLIDER - APP FEEL */
+        /* Centers the cards and improves scroll snapping */
+        .moves-us-section {
+            padding: 60px 0;
         }
         
-        .manifesto-container {
+        .moves-slider {
+            padding: 0 20px; /* Aligns with screen edges */
+            scroll-padding: 20px; /* Snaps to the left edge cleanly */
+        }
+
+        .move-card {
+            flex: 0 0 85vw; /* Shows a hint of the next card */
+            height: 55vh; /* Taller, more immersive images */
+            border-radius: 12px;
+        }
+
+        /* 4. MANIFESTO TYPOGRAPHY */
+        /* Prevents the massive text from breaking the layout */
+        .manifesto-headline {
+            font-size: 2.5rem;
+            line-height: 1;
+        }
+        
+        .manifesto-section {
+            padding: 60px 20px;
+        }
+
+        /* 5. EXPERIENCE GRID */
+        /* Stacks cards vertically with proper breathing room */
+        .offers-grid {
             gap: 30px;
         }
-
-        /* 5. PILL/FOOTER SECTION */
-        /* Removes huge margins and makes it full width */
-        .final-pill-section {
-            width: 100%;
-            border-radius: 0;
-            margin-bottom: 0;
-            padding: 50px 20px;
-            text-align: center;
+        
+        .ref-card-img-wrap {
+            height: 220px; /* Slightly shorter to see content faster */
         }
 
-        .pill-contact-list, .pill-socials {
-            align-items: center;
+        /* 6. PILL FOOTER - MOBILE ADAPTATION */
+        /* Changes from "Pill" to "Card" shape to use screen space */
+        .final-pill-section {
+            width: 92%; /* almost full width */
+            border-radius: 30px; /* Softer corners, not a squeezed pill */
+            padding: 50px 25px;
+            grid-template-columns: 1fr;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .pill-headline {
+            font-size: 2.2rem;
+        }
+        
+        .pill-contact-list {
+            align-items: center; /* Centers icons */
+        }
+        
+        .pill-socials {
             justify-content: center;
         }
         
         .btn-pill-outline {
-            width: 100%;
-            text-align: center;
             float: none;
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        /* 7. GENERAL SPACING */
+        /* Reduces huge desktop gaps to fit mobile scrolling habits */
+        section {
+            padding: 50px 0; /* Consistent vertical rhythm */
         }
     }
     </style>
@@ -1067,4 +1121,5 @@
 </script>
 
 </body>
+
 </html>
