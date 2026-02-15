@@ -419,10 +419,12 @@
 </div>
 
 <script>
+   <script>
     // --- 1. CONFIGURATION & DATA ---
     const experiencesData = {
         'family-dining': {
             title: "Moroccan Tagine Cooking Class",
+            imgPrefix: "cooking", // <--- Will load cooking1.png, cooking2.png, etc.
             description: "Experience authentic Moroccan home cooking, traditional hospitality, and local flavors in a family setting.",
             defaultGuests: 2,
             programme: [
@@ -435,6 +437,7 @@
         },
         'darija-intro': {
             title: "Darija Language Workshop",
+            imgPrefix: "surfing", // <--- Will load surfing1.png, surfing2.png, etc.
             description: "Unlock the secrets of the Moroccan dialect. A fun, interactive session designed to help you navigate the souks like a local.",
             defaultGuests: 1,
             programme: [
@@ -447,6 +450,7 @@
         },
         'medina-walk': {
             title: "Hidden Medina Walk",
+            // No prefix provided, so it defaults to ID (medina-walk1.png)
             description: "Step off the beaten path. Discover secret gardens, ancient artisans, and rooftop views that most tourists never see.",
             defaultGuests: 4,
             programme: [
@@ -498,8 +502,15 @@
         currentImages = []; // Reset lightbox images
 
         data.programme.forEach((step, index) => {
-            // Construct filename: experience-id-step-X.jpg
-            const imgPath = `${state.expId}-step-${index + 1}.jpg`;
+            // --- IMAGE LOGIC START ---
+            // 1. Check if we have a custom prefix (e.g., 'cooking'), otherwise use the ID
+            const prefix = data.imgPrefix || state.expId;
+            
+            // 2. Construct filename: prefix + number + .png
+            // Result: "cooking1.png", "surfing1.png", "medina-walk1.png"
+            const imgPath = `${prefix}${index + 1}.png`; 
+            // --- IMAGE LOGIC END ---
+
             currentImages.push(imgPath);
 
             html += `
@@ -582,9 +593,9 @@
     init();
 
 </script>
-</body>
 
 </html>
+
 
 
 
