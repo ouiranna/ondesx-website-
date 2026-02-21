@@ -419,12 +419,11 @@
 </div>
 
 <script>
-   <script>
     // --- 1. CONFIGURATION & DATA ---
     const experiencesData = {
         'family-dining': {
             title: "Moroccan Tagine Cooking Class",
-            imgPrefix: "cooking", // <--- Will load cooking1.png, cooking2.png, etc.
+            imgPrefix: "cooking",
             description: "Experience authentic Moroccan home cooking, traditional hospitality, and local flavors in a family setting.",
             defaultGuests: 2,
             programme: [
@@ -437,7 +436,7 @@
         },
         'darija-intro': {
             title: "Darija Language Workshop",
-            imgPrefix: "surfing", // <--- Will load surfing1.png, surfing2.png, etc.
+            imgPrefix: "surfing",
             description: "Unlock the secrets of the Moroccan dialect. A fun, interactive session designed to help you navigate the souks like a local.",
             defaultGuests: 1,
             programme: [
@@ -445,12 +444,11 @@
                 { title: "Get Ready & Briefing", desc: "Choose the right wetsuit and prepare yourself for what’s coming. Then head to the flag, where your instructor will give the lesson. Your board will already be waiting for you there." },
                 { title: "Surf Spot & Conditions", desc: "Discover the surf spot with a clear explanation of the wave conditions, safety guidelines, and the best areas to surf before entering the water." },
                 { title: "Technique & Warm-Up", desc: "Practice the basic surfing techniques on the sand and enjoy a short warm-up to prepare your body before entering the water." },
-                { title: "Ride the first wave ", desc: "Dive into the ocean and catch your first wave. Develop your skills with guidance from your instructor and receive helpful tips and rules to improve your surfing." }
+                { title: "Ride the first wave", desc: "Dive into the ocean and catch your first wave. Develop your skills with guidance from your instructor and receive helpful tips and rules to improve your surfing." }
             ]
         },
         'medina-walk': {
             title: "Hidden Medina Walk",
-            // No prefix provided, so it defaults to ID (medina-walk1.png)
             description: "Step off the beaten path. Discover secret gardens, ancient artisans, and rooftop views that most tourists never see.",
             defaultGuests: 4,
             programme: [
@@ -492,25 +490,30 @@
         state.guests = data.defaultGuests;
 
         // 4. Update DOM Elements
-        document.getElementById('exp-title-display').textContent = data.title;
-        document.getElementById('exp-desc-display').textContent = data.description;
-        document.getElementById('guest-count').textContent = state.guests;
+        // Added safety checks just in case the element is missing from HTML
+        const titleEl = document.getElementById('exp-title-display');
+        const descEl = document.getElementById('exp-desc-display');
+        const guestEl = document.getElementById('guest-count');
+
+        if (titleEl) titleEl.textContent = data.title;
+        else console.warn("Missing HTML element: id='exp-title-display'");
+
+        if (descEl) descEl.textContent = data.description;
+        else console.warn("Missing HTML element: id='exp-desc-display'");
+
+        if (guestEl) guestEl.textContent = state.guests;
 
         // 5. Build Timeline & Images
         const timelineContainer = document.getElementById('timeline-container');
+        if (!timelineContainer) return; // Exit early if no timeline container
+
         let html = '';
         currentImages = []; // Reset lightbox images
 
         data.programme.forEach((step, index) => {
-            // --- IMAGE LOGIC START ---
-            // 1. Check if we have a custom prefix (e.g., 'cooking'), otherwise use the ID
             const prefix = data.imgPrefix || state.expId;
-            
-            // 2. Construct filename: prefix + number + .png
-            // Result: "cooking1.png", "surfing1.png", "medina-walk1.png"
             const imgPath = `${prefix}${index + 1}.png`; 
-            // --- IMAGE LOGIC END ---
-
+            
             currentImages.push(imgPath);
 
             html += `
@@ -533,7 +536,8 @@
         const newCount = state.guests + change;
         if(newCount >= 1) {
             state.guests = newCount;
-            document.getElementById('guest-count').textContent = state.guests;
+            const guestEl = document.getElementById('guest-count');
+            if (guestEl) guestEl.textContent = state.guests;
         }
     };
 
@@ -550,9 +554,9 @@
     };
 
     window.submitBooking = function() {
-        state.date = document.getElementById('date-input').value;
-        state.phone = document.getElementById('phone-input').value;
-        state.email = document.getElementById('email-input').value;
+        state.date = document.getElementById('date-input') ? document.getElementById('date-input').value : '';
+        state.phone = document.getElementById('phone-input') ? document.getElementById('phone-input').value : '';
+        state.email = document.getElementById('email-input') ? document.getElementById('email-input').value : '';
 
         if(!state.date || !state.time || !state.phone || !state.email) {
             alert("Please fill in all fields (Date, Time, Phone, Email)");
@@ -568,33 +572,47 @@
     window.openLightbox = function(index) {
         currentImgIndex = index;
         const lightbox = document.getElementById('gallery-lightbox');
-        document.getElementById('lightbox-img').src = currentImages[currentImgIndex];
-        lightbox.classList.add('active');
-        document.body.style.overflow = 'hidden'; 
+        const imgEl = document.getElementById('lightbox-img');
+        if (lightbox && imgEl) {
+            imgEl.src = currentImages[currentImgIndex];
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden'; 
+        }
     };
 
     window.closeLightbox = function() {
-        document.getElementById('gallery-lightbox').classList.remove('active');
-        document.body.style.overflow = '';
+        const lightbox = document.getElementById('gallery-lightbox');
+        if (lightbox) {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        }
     };
 
     window.changeSlide = function(n) {
         currentImgIndex += n;
         if (currentImgIndex >= currentImages.length) currentImgIndex = 0;
         if (currentImgIndex < 0) currentImgIndex = currentImages.length - 1;
-        document.getElementById('lightbox-img').src = currentImages[currentImgIndex];
+        const imgEl = document.getElementById('lightbox-img');
+        if (imgEl) imgEl.src = currentImages[currentImgIndex];
     };
 
-    document.getElementById('gallery-lightbox').addEventListener('click', function(e) {
-        if(e.target === this) closeLightbox();
+    // Add listener only if the element exists
+    document.addEventListener('DOMContentLoaded', () => {
+        const lightbox = document.getElementById('gallery-lightbox');
+        if (lightbox) {
+            lightbox.addEventListener('click', function(e) {
+                if(e.target === this) closeLightbox();
+            });
+        }
+        
+        // Run Initialization after DOM is fully loaded
+        init();
     });
-
-    // Run Initialization
-    init();
 
 </script>
 </body>
 </html>
+
 
 
 
