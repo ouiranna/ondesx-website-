@@ -373,10 +373,8 @@
         <div class="form-group">
             <label class="label">Select Time</label>
             <div class="pill-container">
-                <div class="pill" onclick="selectTime(this)">11h - 14h</div>
-                <div class="pill" onclick="selectTime(this)">15h - 18h</div>
-                <div class="pill" onclick="selectTime(this)">19h - 22h</div>
-            </div>
+<div class="pill-container" id="time-container">
+</div>
         </div>
 
         <div class="form-group">
@@ -433,6 +431,7 @@
             imgPrefix: "cooking",
             description: "Experience authentic Moroccan home cooking, traditional hospitality, and local flavors in a family setting.",
             defaultGuests: 2,
+            times: ["11h - 14h", "15h - 18h", "19h - 22h"],
             programme: [
                 { title: "Welcome & Transfer", desc: "The meeting point is listed on Google Maps as “Ouiranna”and Our team will welcome you and provide a free transfer to the experience location." },
                 { title: "Ingredients Shopping & Tagine Choice", desc: "Choose your tagine menu, explore Moroccan spices, and shop for the fresh ingredients needed for your dish." },
@@ -446,6 +445,7 @@
             imgPrefix: "surfing",
             description: "Beginner surf lessons with Ouiranna — learn to surf safely with expert instructors and catch your first wave.",
             defaultGuests: 1,
+            times: ["10h - 12h", "14h - 16h", "16h - 18h"],
             programme: [
                 { title: "Welcome & Introduction", desc: "The meeting point is listed on Google Maps as “Ouiranna”. Our team will welcome you and introduce you to the activity before starting the experience." },
                 { title: "Get Ready & Briefing", desc: "Choose the right wetsuit and prepare yourself for what’s coming. Then head to the flag, where your instructor will give the lesson. Your board will already be waiting for you there." },
@@ -482,6 +482,17 @@
 
         // 3. Load Data
         const data = experiencesData[state.expId];
+        // ✅ Build Time Slots Dynamically
+const timeContainer = document.getElementById('time-container');
+if (timeContainer && data.times) {
+    let timeHTML = '';
+
+    data.times.forEach(time => {
+        timeHTML += `<div class="pill" onclick="selectTime(this)">${time}</div>`;
+    });
+
+    timeContainer.innerHTML = timeHTML;
+}
         state.guests = data.defaultGuests;
 
         // 4. Update DOM Elements
@@ -620,6 +631,7 @@
 </script>
 </body>
 </html>
+
 
 
 
