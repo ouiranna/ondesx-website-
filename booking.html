@@ -553,7 +553,7 @@
         state.gift = el.querySelector('.g-name').innerText;
     };
 
-    window.submitBooking = function() {
+   window.submitBooking = function() {
         state.date = document.getElementById('date-input') ? document.getElementById('date-input').value : '';
         state.phone = document.getElementById('phone-input') ? document.getElementById('phone-input').value : '';
         state.email = document.getElementById('email-input') ? document.getElementById('email-input').value : '';
@@ -562,12 +562,25 @@
             alert("Please fill in all fields (Date, Time, Phone, Email)");
             return;
         }
-        
-        // Demo Submission
-        const expTitle = experiencesData[state.expId].title;
-        alert(`BOOKING REQUEST\n\nExperience: ${expTitle}\nGuests: ${state.guests}\nDate: ${state.date}\nTime: ${state.time}\nPhone: ${state.phone}\nEmail: ${state.email}`);
-    };
 
+        const expTitle = experiencesData[state.expId].title;
+        const giftText = state.gift ? state.gift : 'None selected';
+        
+        const message = `*NEW BOOKING REQUEST* 📅\n` +
+                        `-----------------------------------\n` +
+                        `*Experience:* ${expTitle}\n` +
+                        `*Date:* ${state.date}\n` +
+                        `*Time:* ${state.time}\n` +
+                        `*Guests:* ${state.guests}\n` +
+                        `*Gift:* ${giftText}\n` +
+                        `-----------------------------------\n` +
+                        `*Client Phone:* ${state.phone}\n` +
+                        `*Client Email:* ${state.email}`;
+
+        const whatsappUrl = `https://wa.me/212696809738?text=${encodeURIComponent(message)}`;
+        
+        window.open(whatsappUrl, '_blank');
+    };
     // --- 5. LIGHTBOX ACTIONS ---
     window.openLightbox = function(index) {
         currentImgIndex = index;
@@ -612,6 +625,7 @@
 </script>
 </body>
 </html>
+
 
 
 
