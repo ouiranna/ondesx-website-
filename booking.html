@@ -313,10 +313,17 @@
                 flex-direction: column; width: 100%; height: auto !important;
                 max-height: none !important; min-height: 0; border-radius: 16px;
                 box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+                overflow: visible !important; 
+                z-index: 10; 
             }
             .program-col { order: 1; border-right: none; border-bottom: 1px solid #eee; }
             .form-col { order: 2; }
-            .program-col, .form-col { padding: 40px 25px; overflow: visible; width: 100%; }
+            .program-col, .form-col { 
+                padding: 40px 25px; 
+                width: 100%; 
+                overflow: visible !important; 
+                -webkit-overflow-scrolling: auto !important; 
+            }
             .section-headline { font-size: 26px; margin-bottom: 15px; letter-spacing: -1px; }
             .section-headline::after { margin-top: 15px; }
             .section-desc { margin-bottom: 30px; font-size: 13px; }
@@ -613,6 +620,7 @@
 </script>
 </body>
 </html>
+
 
 
 
